@@ -46,7 +46,7 @@ window.renderStatistics = function (ctx, names, times) {
   drawCloud(ctx, CLOUD_X, CLOUD_Y, '#ffffff');
   ctx.fillStyle = '#000000';
   ctx.font = '16px "PT Mono"';
-  ctx.fillText('Ура вы победили', BAR_X, CLOUD_Y + TEXT_GAP);
+  ctx.fillText('Ура вы победили!', BAR_X, CLOUD_Y + TEXT_GAP);
   ctx.fillText('Список результатов:', BAR_X, CLOUD_Y + TEXT_GAP + TEXT_WIDTH);
 
   var maxTime = getMaxElement(times);
