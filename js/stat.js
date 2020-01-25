@@ -33,12 +33,7 @@ var getMaxElement = function (elements) {
 };
 
 var generateColor = function () {
-  var color = 'hsl(240, ';
-
-  color += Math.floor(Math.random() * 100);
-  color += '%, 50%)';
-
-  return color;
+  return 'hsl(240, ' + Math.floor(Math.random() * 100) + '%, 50%)';
 };
 
 window.renderStatistics = function (ctx, names, times) {
