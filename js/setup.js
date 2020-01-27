@@ -1,16 +1,14 @@
 'use strict';
 
+var WIZARDS_NAMES_COUNT = 7;
+var COAT_COLORS_COUNT = 5;
+var EYES_COLORS_COUNT = 4;
+var WIZARDS_COUNT = 4;
+
 var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var WIZARDS_NAMES_COUNT = 7;
-
 var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-var COAT_COLORS_COUNT = 5;
-
 var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
-var EYES_COLORS_COUNT = 4;
-
-var WIZARDS_COUNT = 4;
 
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
