@@ -11,7 +11,16 @@ var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)
 var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
+var userDialogOpen = document.querySelector('.setup-open');
+var userDialogClose = userDialog.querySelector('.setup-close');
+
+userDialogOpen.addEventListener('click', function () {
+  userDialog.classList.remove('hidden');
+});
+
+userDialogClose.addEventListener('click', function () {
+  userDialog.classList.add('hidden');
+});
 
 var getRandomValue = function (maxValue) {
   return Math.floor(Math.random() * Math.floor(maxValue));
