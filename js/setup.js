@@ -7,11 +7,13 @@ var WIZARDS_COUNT = 4;
 var ESC_KEY = 'Escape';
 var ENTER_KEY = 'Enter';
 var MIN_NAME_LENGTH = 2;
+var FIREBALL_COLORS_COUNT = 4;
 
 var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
+var fireballColors = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
 var userDialog = document.querySelector('.setup');
 var userDialogOpen = document.querySelector('.setup-open');
@@ -136,3 +138,41 @@ renderWizards(wizards);
 var setupSimilar = document.querySelector('.setup-similar');
 
 setupSimilar.classList.remove('hidden');
+
+var setupWizard = userDialog.querySelector('.setup-wizard');
+var wizardCoat = setupWizard.querySelector('.wizard-coat');
+var wizardEyes = setupWizard.querySelector('.wizard-eyes');
+var fireball = userDialog.querySelector('.setup-fireball-wrap');
+
+var clickOnWizardCoat = function () {
+  var generatedColor = getRandomColor(coatColors, COAT_COLORS_COUNT);
+  var coatColorInput = userDialog.querySelector('.setup-coat-color');
+  wizardCoat.style.fill = generatedColor;
+  coatColorInput.value = generatedColor;
+};
+
+var clickOnWizardEyes = function () {
+  var generatedColor = getRandomColor(eyesColors, EYES_COLORS_COUNT);
+  var coatColorInput = userDialog.querySelector('.setup-eyes-color');
+  wizardEyes.style.fill = generatedColor;
+  coatColorInput.value = generatedColor;
+};
+
+var clickOnFireball = function () {
+  var generatedColor = getRandomColor(fireballColors, FIREBALL_COLORS_COUNT);
+  var fireballColorInput = userDialog.querySelector('.setup-fireball-color');
+  fireball.style.backgroundColor = generatedColor;
+  fireballColorInput.value = generatedColor;
+};
+
+wizardCoat.addEventListener('click', function () {
+  clickOnWizardCoat();
+});
+
+wizardEyes.addEventListener('click', function () {
+  clickOnWizardEyes();
+});
+
+fireball.addEventListener('click', function () {
+  clickOnFireball();
+});
