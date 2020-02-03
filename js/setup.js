@@ -4,6 +4,8 @@ var WIZARDS_NAMES_COUNT = 7;
 var COAT_COLORS_COUNT = 5;
 var EYES_COLORS_COUNT = 4;
 var WIZARDS_COUNT = 4;
+var ESC_KEY = 'Escape';
+var ENTER_KEY = 'Enter';
 
 var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -14,12 +16,40 @@ var userDialog = document.querySelector('.setup');
 var userDialogOpen = document.querySelector('.setup-open');
 var userDialogClose = userDialog.querySelector('.setup-close');
 
-userDialogOpen.addEventListener('click', function () {
+var onPopupEscPress = function (evt) {
+  if (evt.key === ESC_KEY) {
+    closeUserDialog();
+  }
+};
+
+var openUserDialog = function () {
   userDialog.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closeUserDialog = function () {
+  userDialog.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+userDialogOpen.addEventListener('click', function () {
+  openUserDialog();
+});
+
+userDialogOpen.addEventListener('keydown', function (evt) {
+  if (evt.key === ENTER_KEY) {
+    openUserDialog();
+  }
 });
 
 userDialogClose.addEventListener('click', function () {
-  userDialog.classList.add('hidden');
+  closeUserDialog();
+});
+
+userDialogClose.addEventListener('keydown', function (evt) {
+  if (evt.key === ENTER_KEY) {
+    closeUserDialog();
+  }
 });
 
 var getRandomValue = function (maxValue) {
