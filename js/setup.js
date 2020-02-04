@@ -4,14 +4,83 @@ var WIZARDS_NAMES_COUNT = 7;
 var COAT_COLORS_COUNT = 5;
 var EYES_COLORS_COUNT = 4;
 var WIZARDS_COUNT = 4;
+var ESC_KEY = 'Escape';
+var ENTER_KEY = 'Enter';
+var MIN_NAME_LENGTH = 2;
+var FIREBALL_COLORS_COUNT = 4;
 
 var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var coatColors = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
+var fireballColors = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
 var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
+var userDialogOpen = document.querySelector('.setup-open');
+var userDialogClose = userDialog.querySelector('.setup-close');
+
+var onPopupEscPress = function (evt) {
+  if (evt.key === ESC_KEY) {
+    closeUserDialog();
+  }
+};
+
+var openUserDialog = function () {
+  userDialog.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closeUserDialog = function () {
+  userDialog.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+userDialogOpen.addEventListener('click', function () {
+  openUserDialog();
+});
+
+userDialogOpen.addEventListener('keydown', function (evt) {
+  if (evt.key === ENTER_KEY) {
+    openUserDialog();
+  }
+});
+
+userDialogClose.addEventListener('click', function () {
+  closeUserDialog();
+});
+
+userDialogClose.addEventListener('keydown', function (evt) {
+  if (evt.key === ENTER_KEY) {
+    closeUserDialog();
+  }
+});
+
+var userNameInput = userDialog.querySelector('.setup-user-name');
+
+userNameInput.addEventListener('invalid', function () {
+  if (userNameInput.validity.tooShort) {
+    userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else if (userNameInput.validity.tooLong) {
+    userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
+  } else if (userNameInput.validity.valueMissing) {
+    userNameInput.setCustomValidity('Обязательное поле');
+  } else {
+    userNameInput.setCustomValidity('');
+  }
+});
+
+userNameInput.addEventListener('input', function (evt) {
+  var target = evt.target;
+  if (target.value.length < MIN_NAME_LENGTH) {
+    target.setCustomValidity(
+        'Имя должно состоять минимум из ' +
+        MIN_NAME_LENGTH +
+        '-х символов'
+    );
+  } else {
+    target.setCustomValidity('');
+  }
+});
 
 var getRandomValue = function (maxValue) {
   return Math.floor(Math.random() * Math.floor(maxValue));
@@ -69,3 +138,41 @@ renderWizards(wizards);
 var setupSimilar = document.querySelector('.setup-similar');
 
 setupSimilar.classList.remove('hidden');
+
+var setupWizard = userDialog.querySelector('.setup-wizard');
+var wizardCoat = setupWizard.querySelector('.wizard-coat');
+var wizardEyes = setupWizard.querySelector('.wizard-eyes');
+var fireball = userDialog.querySelector('.setup-fireball-wrap');
+
+var clickOnWizardCoat = function () {
+  var generatedColor = getRandomColor(coatColors, COAT_COLORS_COUNT);
+  var coatColorInput = userDialog.querySelector('.setup-coat-color');
+  wizardCoat.style.fill = generatedColor;
+  coatColorInput.value = generatedColor;
+};
+
+var clickOnWizardEyes = function () {
+  var generatedColor = getRandomColor(eyesColors, EYES_COLORS_COUNT);
+  var coatColorInput = userDialog.querySelector('.setup-eyes-color');
+  wizardEyes.style.fill = generatedColor;
+  coatColorInput.value = generatedColor;
+};
+
+var clickOnFireball = function () {
+  var generatedColor = getRandomColor(fireballColors, FIREBALL_COLORS_COUNT);
+  var fireballColorInput = userDialog.querySelector('.setup-fireball-color');
+  fireball.style.backgroundColor = generatedColor;
+  fireballColorInput.value = generatedColor;
+};
+
+wizardCoat.addEventListener('click', function () {
+  clickOnWizardCoat();
+});
+
+wizardEyes.addEventListener('click', function () {
+  clickOnWizardEyes();
+});
+
+fireball.addEventListener('click', function () {
+  clickOnFireball();
+});
