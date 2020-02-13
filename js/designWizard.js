@@ -11,21 +11,21 @@
   var wizardEyes = setupWizard.querySelector('.wizard-eyes');
   var fireball = userDialog.querySelector('.setup-fireball-wrap');
 
-  var clickOnWizardCoat = function () {
+  var onWizardCoatClick = function () {
     var generatedColor = window.wizardSetupUtils.getCoatColor();
     var coatColorInput = userDialog.querySelector('.setup-coat-color');
     wizardCoat.style.fill = generatedColor;
     coatColorInput.value = generatedColor;
   };
 
-  var clickOnWizardEyes = function () {
+  var onWizardEyesClick = function () {
     var generatedColor = window.wizardSetupUtils.getEyesColor();
     var coatColorInput = userDialog.querySelector('.setup-eyes-color');
     wizardEyes.style.fill = generatedColor;
     coatColorInput.value = generatedColor;
   };
 
-  var clickOnFireball = function () {
+  var onFireballClick = function () {
     var generatedColor = window.wizardSetupUtils.getFireballColor();
     var fireballColorInput = userDialog.querySelector('.setup-fireball-color');
     fireball.style.backgroundColor = generatedColor;
@@ -33,14 +33,14 @@
   };
 
   wizardCoat.addEventListener('click', function () {
-    clickOnWizardCoat();
+    onWizardCoatClick();
   });
 
   wizardEyes.addEventListener('click', function () {
-    clickOnWizardEyes();
+    onWizardEyesClick();
   });
 
   fireball.addEventListener('click', function () {
-    clickOnFireball();
+    onFireballClick();
   });
 })();
