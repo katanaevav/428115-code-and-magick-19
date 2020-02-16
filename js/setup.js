@@ -62,20 +62,6 @@
     }
   });
 
-  var getWizards = function (count) {
-    var wizardsArray = [];
-    for (var i = 0; i < count; i++) {
-      wizardsArray.push({
-        name: window.wizardSetupUtils.getName(),
-        coatColor: window.wizardSetupUtils.getCoatColor(),
-        eyesColor: window.wizardSetupUtils.getEyesColor()
-      });
-    }
-    return wizardsArray;
-  };
-
-  var wizards = getWizards(window.wizardSetupUtils.wizardsCount);
-
   var similarList = userDialog.querySelector('.setup-similar-list');
 
   var similarWizardTemplate = document.querySelector('#similar-wizard-template')
@@ -86,20 +72,32 @@
     var wizardTemplate = similarWizardTemplate.cloneNode(true);
 
     wizardTemplate.querySelector('.setup-similar-label').textContent = wizard.name;
-    wizardTemplate.querySelector('.wizard-coat').style.fill = wizard.coatColor;
-    wizardTemplate.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+    wizardTemplate.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
+    wizardTemplate.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
 
     return wizardTemplate;
   };
 
-  var renderWizards = function (wizardsList) {
+  var onSuccessLoad = function (wizards) {
     var fragment = document.createDocumentFragment();
 
-    for (var i = 0; i < wizardsList.length; i++) {
-      fragment.appendChild(createWizard(wizardsList[i]));
+    for (var i = 0; i < 4; i++) {
+      fragment.appendChild(createWizard(wizards[i]));
     }
+
     similarList.appendChild(fragment);
   };
 
-  renderWizards(wizards);
+  var onSuccessSave = function () {
+    userDialog.classList.add('hidden');
+  };
+
+  window.backend.load(onSuccessLoad, window.backend.error);
+
+  var form = userDialog.querySelector('.setup-wizard-form');
+
+  form.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    window.backend.save(new FormData(form), onSuccessSave, window.backend.error);
+  });
 })();
