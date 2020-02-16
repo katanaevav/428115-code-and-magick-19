@@ -62,20 +62,6 @@
     }
   });
 
-  // var getWizards = function (count) {
-  //   var wizardsArray = [];
-  //   for (var i = 0; i < count; i++) {
-  //     wizardsArray.push({
-  //       name: window.wizardSetupUtils.getName(),
-  //       coatColor: window.wizardSetupUtils.getCoatColor(),
-  //       eyesColor: window.wizardSetupUtils.getEyesColor()
-  //     });
-  //   }
-  //   return wizardsArray;
-  // };
-
-  // var wizards = getWizards(window.wizardSetupUtils.wizardsCount);
-
   var similarList = userDialog.querySelector('.setup-similar-list');
 
   var similarWizardTemplate = document.querySelector('#similar-wizard-template')
@@ -92,17 +78,6 @@
     return wizardTemplate;
   };
 
-  // var renderWizards = function (wizardsList) {
-  //   var fragment = document.createDocumentFragment();
-
-  //   for (var i = 0; i < wizardsList.length; i++) {
-  //     fragment.appendChild(createWizard(wizardsList[i]));
-  //   }
-  //   similarList.appendChild(fragment);
-  // };
-
-  // renderWizards(wizards);
-
   var onSuccessLoad = function (wizards) {
     var fragment = document.createDocumentFragment();
 
@@ -113,29 +88,16 @@
     similarList.appendChild(fragment);
   };
 
-  var onError = function (errorMessage) {
-    var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; padding: 10px; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = '10px';
-    node.style.right = '10px';
-    node.style.top = '10px';
-    node.style.fontSize = '30px';
-
-    node.textContent = 'Ошибка:  "' + errorMessage + '"';
-    document.body.insertAdjacentElement('afterbegin', node);
-  };
-
   var onSuccessSave = function () {
     userDialog.classList.add('hidden');
   };
 
-  window.backend.load(onSuccessLoad, onError);
+  window.backend.load(onSuccessLoad, window.backend.error);
 
   var form = userDialog.querySelector('.setup-wizard-form');
 
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    window.backend.save(new FormData(form), onSuccessSave, onError);
+    window.backend.save(new FormData(form), onSuccessSave, window.backend.error);
   });
 })();

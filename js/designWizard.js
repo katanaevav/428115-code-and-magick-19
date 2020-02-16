@@ -32,15 +32,9 @@
     fireballColorInput.value = generatedColor;
   };
 
-  wizardCoat.addEventListener('click', function () {
-    onWizardCoatClick();
-  });
+  wizardCoat.addEventListener('click', onWizardCoatClick);
 
-  wizardEyes.addEventListener('click', function () {
-    onWizardEyesClick();
-  });
+  wizardEyes.addEventListener('click', onWizardEyesClick);
 
-  fireball.addEventListener('click', function () {
-    onFireballClick();
-  });
+  fireball.addEventListener('click', onFireballClick);
 })();
