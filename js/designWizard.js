@@ -4,6 +4,9 @@
   var userDialog = document.querySelector('.setup');
   var setupSimilar = document.querySelector('.setup-similar');
 
+  var coatColor = '#6589a4';
+  var eyeColor = '#000000';
+
   setupSimilar.classList.remove('hidden');
 
   var setupWizard = userDialog.querySelector('.setup-wizard');
@@ -12,17 +15,19 @@
   var fireball = userDialog.querySelector('.setup-fireball-wrap');
 
   var onWizardCoatClick = function () {
-    var generatedColor = window.wizardSetupUtils.getCoatColor();
+    coatColor = window.wizardSetupUtils.getCoatColor();
     var coatColorInput = userDialog.querySelector('.setup-coat-color');
-    wizardCoat.style.fill = generatedColor;
-    coatColorInput.value = generatedColor;
+    wizardCoat.style.fill = coatColor;
+    coatColorInput.value = coatColor;
+    window.setupSimilar.updateSimilarWizards(eyeColor, coatColor);
   };
 
   var onWizardEyesClick = function () {
-    var generatedColor = window.wizardSetupUtils.getEyesColor();
-    var coatColorInput = userDialog.querySelector('.setup-eyes-color');
-    wizardEyes.style.fill = generatedColor;
-    coatColorInput.value = generatedColor;
+    eyeColor = window.wizardSetupUtils.getEyesColor();
+    var eyeColorInput = userDialog.querySelector('.setup-eyes-color');
+    wizardEyes.style.fill = eyeColor;
+    eyeColorInput.value = eyeColor;
+    window.setupSimilar.updateSimilarWizards(eyeColor, coatColor);
   };
 
   var onFireballClick = function () {
@@ -37,4 +42,9 @@
   wizardEyes.addEventListener('click', onWizardEyesClick);
 
   fireball.addEventListener('click', onFireballClick);
+
+  window.designWizard = {
+    coatColor: coatColor,
+    eyeColor: eyeColor
+  };
 })();

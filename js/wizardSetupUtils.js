@@ -1,6 +1,6 @@
 'use strict';
 
-window.wizardSetupUtils = (function () {
+(function () {
   var MIN_NAME_LENGTH = 2;
   var DEFAULT_EYES_COLOR = 'black';
   var DEFAULT_COAT_COLOR = 'rgb(101, 137, 164)';
@@ -14,7 +14,7 @@ window.wizardSetupUtils = (function () {
     return Math.floor(Math.random() * Math.floor(maxValue));
   };
 
-  return {
+  window.wizardSetupUtils = {
     minNameLength: MIN_NAME_LENGTH,
     currentEyesColor: DEFAULT_EYES_COLOR,
     currentCoatColor: DEFAULT_COAT_COLOR,
