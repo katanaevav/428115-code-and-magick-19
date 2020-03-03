@@ -62,37 +62,9 @@
     }
   });
 
-  var similarList = userDialog.querySelector('.setup-similar-list');
-
-  var similarWizardTemplate = document.querySelector('#similar-wizard-template')
-      .content
-      .querySelector('.setup-similar-item');
-
-  var createWizard = function (wizard) {
-    var wizardTemplate = similarWizardTemplate.cloneNode(true);
-
-    wizardTemplate.querySelector('.setup-similar-label').textContent = wizard.name;
-    wizardTemplate.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
-    wizardTemplate.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
-
-    return wizardTemplate;
-  };
-
-  var onSuccessLoad = function (wizards) {
-    var fragment = document.createDocumentFragment();
-
-    for (var i = 0; i < 4; i++) {
-      fragment.appendChild(createWizard(wizards[i]));
-    }
-
-    similarList.appendChild(fragment);
-  };
-
   var onSuccessSave = function () {
     userDialog.classList.add('hidden');
   };
-
-  window.backend.load(onSuccessLoad, window.backend.error);
 
   var form = userDialog.querySelector('.setup-wizard-form');
 
