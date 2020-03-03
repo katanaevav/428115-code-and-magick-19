@@ -39,9 +39,9 @@
 
   var renderWizards = function (data) {
     var fragment = document.createDocumentFragment();
-    var takeNumber = data.length > SIMILAR_WIZARDS_COUNT ? SIMILAR_WIZARDS_COUNT : data.length;
+    var similarWizardsCount = data.length > SIMILAR_WIZARDS_COUNT ? SIMILAR_WIZARDS_COUNT : data.length;
     similarList.innerHTML = '';
-    for (var i = 0; i < takeNumber; i++) {
+    for (var i = 0; i < similarWizardsCount; i++) {
       fragment.appendChild(createWizard(data[i]));
     }
     similarList.appendChild(fragment);
